@@ -1,10 +1,15 @@
+from request import Request
+
+from response import Response
+
+
 def app(environ, start_response):
-    status = '200 OK'  # HTTP Status
+    request = Request(environ)
+    status = 200  # HTTP Status
     response_body = 'Hello, world! This is my first WSGI app.'
     response_headers = [
         ('Content-type', 'text/plain'),
         ('Content-length', str(len(response_body)))    
     ]
-    start_response(status, response_headers)
-    body = 'Hello, world! This is my first WSGI app.'
-    return [body.encode('utf-8')]  # WSGI requires bytes
+    response = Response(status = status, body = response_body, headers = response_headers)
+    return response(start_response)
