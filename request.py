@@ -27,10 +27,10 @@ class Request:
             
     @property
     def headers(self):
-        header = {}
+        headers = {}
         for key, value in self.environ.items():
             if (key.startswith('HTTP_')):
-                header.update({key[5:].replace('_', '-').title() : value})
+                headers.update({key[5:].replace('_', '-').title() : value})
             else:
                 continue
-        return header
+        return headers
