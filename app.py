@@ -2,11 +2,15 @@ from request import Request
 
 from response import Response
 
+from dispatcher import dispatcher
 
 def app(environ, start_response):
     request = Request(environ)
     status = 200  # HTTP Status
-    response_body = 'Hello, world! This is my first WSGI app.'
+    handler, kwargs = dispatcher.match(request.path)
+    print (kwargs)
+    print (type(kwargs))
+    response_body = handler(request, **kwargs)
     response_headers = [
         ('Content-type', 'text/plain'),
         ('Content-length', str(len(response_body)))    

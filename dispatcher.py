@@ -1,5 +1,6 @@
 import re
 
+from routes import url_patterns
 
 class RouteNotFound(Exception):
     pass
@@ -12,12 +13,14 @@ class Dispatcher:
         self.routes = []
 
 
-    def add(self, path_pattern, handler):
-        # Convert dynamic segments like <id> to regex groups
-        pattern = re.sub(r'<(\w+)>', r'(?P<\1>[^/]+)', path_pattern)
-        pattern = f"^{pattern}$"
-        compiled = re.compile(pattern)
-        self.routes.append((compiled, handler))
+    def add(self, url_patterns):
+        if len(url_patterns) > 0:
+            for pattern, handler in url_patterns:
+                pattern = re.sub(r'<(\w+)>', r'(?P<\1>[^/]+)', pattern)
+                pattern = f"^{pattern}$"
+                compiled = re.compile(pattern)
+                self.routes.append((compiled, handler))
+
 
 
     def match(self, path):
@@ -26,3 +29,8 @@ class Dispatcher:
             if match:
                 return handler, match.groupdict()
         raise RouteNotFound(f"No route matches {path}")
+    
+
+dispatcher = Dispatcher()
+
+dispatcher.add(url_patterns)
