@@ -22,11 +22,14 @@ class Response:
         
     def __call__(self, start_response):
         status_str = f"{self.status} {_status_text(self.status)}"
-        headers_list = [('Content-Type', 'text/html; charset=utf-8')] + list(self.headers.items())
+        if isinstance(self.headers, list):
+            headers_list = [('Content-Type', 'text/html; charset=utf-8')] + self.headers
+        else:
+            headers_list = [('Content-Type', 'text/html; charset=utf-8')] + list(self.headers.items())
         start_response(status_str, headers_list)
         return [self.body]
         
-
+    @staticmethod
     def _status_text(status_code):
         http_status_codes = {
             100: "Continue",
