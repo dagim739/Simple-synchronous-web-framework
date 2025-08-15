@@ -12,7 +12,7 @@ def app(environ, start_response):
     print (type(kwargs))
     response_body = handler(request, **kwargs)
     response_headers = [
-        ('Content-type', 'text/plain'),
+        ('Content-type', 'text/html'),
         ('Content-length', str(len(response_body)))    
     ]
     response = Response(status = status, body = response_body, headers = response_headers)

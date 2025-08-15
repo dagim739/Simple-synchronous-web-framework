@@ -21,7 +21,7 @@ class Response:
             raise TypeError(f"headers must be of type str or bytes, got {type(headers).__name__}")
         
     def __call__(self, start_response):
-        status_str = f"{self.status} {_status_text(self.status)}"
+        status_str = f"{self.status} {self._status_text(self.status)}"
         if isinstance(self.headers, list):
             headers_list = [('Content-Type', 'text/html; charset=utf-8')] + self.headers
         else:

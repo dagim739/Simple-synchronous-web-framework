@@ -12,6 +12,5 @@ def about(request, **kwargs):
     return 'about'
 
 
-
 def services(request, **kwargs):
     return 'services'

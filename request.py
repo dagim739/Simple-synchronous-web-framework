@@ -31,6 +31,4 @@ class Request:
         for key, value in self.environ.items():
             if (key.startswith('HTTP_')):
                 headers.update({key[5:].replace('_', '-').title() : value})
-            else:
-                continue
         return headers
