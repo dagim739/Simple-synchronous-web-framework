@@ -8,8 +8,6 @@ def app(environ, start_response):
     request = Request(environ)
     status = 200  # HTTP Status
     handler, kwargs = dispatcher.match(request.path)
-    print (kwargs)
-    print (type(kwargs))
     response_body = handler(request, **kwargs)
     response_headers = [
         ('Content-type', 'text/html'),
