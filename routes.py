@@ -1,11 +1,11 @@
-import views
+import handlers
 
 
 # Here is where you add your routes
 url_patterns = [
 #   ('/route', handler)
-    ('/home', views.home),
-    ('/contact', views.contact),
-    ('/about', views.about),
-    ('/services', views.services),
+    ('/home', handlers.home),
+    ('/contact', handlers.contact),
+    ('/about', handlers.about),
+    ('/services', handlers.services),
 ]
