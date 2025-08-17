@@ -8,7 +8,7 @@ class Response:
             else:
                 self.status = status
         except TypeError:
-            raise TypeError(f"status must be type int, got {type(status).__name__}")
+            raise TypeError(f"status must be of type int, got {type(status).__name__}")
         if headers is None:
             self.headers = {}
         else:
@@ -18,14 +18,14 @@ class Response:
         elif isinstance(body, str):
             self.body = body.encode('utf-8')
         else:
-            raise TypeError(f"headers must be of type str or bytes, got {type(headers).__name__}")
+            raise TypeError(f"body must be of type str or bytes, got {type(body).__name__}")
         
     def __call__(self, start_response):
         status_str = f"{self.status} {self._status_text(self.status)}"
         if isinstance(self.headers, list):
-            headers_list = [('Content-Type', 'text/html; charset=utf-8')] + self.headers
-        else:
-            headers_list = [('Content-Type', 'text/html; charset=utf-8')] + list(self.headers.items())
+            headers_list = self.headers
+        elif isinstance(self.instance, dict):
+            headers_list = [] + list(self.headers.items())
         start_response(status_str, headers_list)
         return [self.body]
         

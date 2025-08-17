@@ -4,14 +4,20 @@ from response import Response
 
 from dispatcher import dispatcher
 
+from middlewareloader import middlewareloader
+
+from settings import MIDDLEWARESTACK
+
 def app(environ, start_response):
     request = Request(environ)
     status = 200  # HTTP Status
     handler, kwargs = dispatcher.match(request.path)
-    response_body = handler(request, **kwargs)
+    stacked = middlewareloader(handler, MIDDLEWARESTACK)
+    handler_response = stacked(request, **kwargs)
+    status = handler_response.status
     response_headers = [
-        ('Content-type', 'text/html'),
-        ('Content-length', str(len(response_body)))    
+        ('Content-length', str(len(handler_response.body)))    
     ]
-    response = Response(status = status, body = response_body, headers = response_headers)
+    response_headers = response_headers + list(handler_response.header.items())
+    response = Response(status = status, body = handler_response.body, headers = response_headers)
     return response(start_response)

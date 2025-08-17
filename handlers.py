@@ -1,16 +1,19 @@
+from handlerResponse import HttpResponse
+from handlerResponse import JsonResponse
+
+
 # define your handlers here
 
+
 def home(request, **kwargs):
-    return 'home'
+    status = 200
+    body = "This is the handler home"
+    headers = {'Content-Type' : 'text/plain'}
+    return HttpResponse(headers = headers, status = status, body = body)
 
 
 def contact(request , **kwargs):
-    return 'contact'
-
-
-def about(request, **kwargs):
-    return 'about'
-
-
-def services(request, **kwargs):
-    return 'services'
+    status = 200
+    data = {'name':'dagim'}
+    headers = {}
+    return JsonResponse(headers = headers, status = status, data = data)
