@@ -1,4 +1,10 @@
+import os
+import mimetypes
+import settings
+from handlerResponse import HttpResponse
+
 # Here you define your middle wares
+
 
 class LoggerMiddleware:
     def __init__(self, app):
