@@ -40,6 +40,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+TEMPLATES_DIRS = [
+    BASE_DIR / "templates"
+]
+
 
 FAVICON_URL = "/favicon.ico"
 
