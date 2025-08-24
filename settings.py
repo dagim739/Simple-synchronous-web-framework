@@ -22,7 +22,7 @@ MIDDLEWARESTACK = [
 # define database address and the ORM engine
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'postgresql',
         'NAME': 'drdebeletola',
         'HOST': 'localhost',
         'PORT': '5432',
