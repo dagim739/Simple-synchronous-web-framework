@@ -23,7 +23,7 @@ MIDDLEWARESTACK = [
 DATABASES = {
     'default': {
         'ENGINE': 'postgresql',
-        'NAME': 'drdebeletola',
+        'NAME': 'insapractice',
         'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'postgres',
