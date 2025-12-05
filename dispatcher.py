@@ -1,11 +1,10 @@
 import re
+import handlers
 
 from routes import url_patterns
 
 class RouteNotFound(Exception):
     pass
-
-
 
 class Dispatcher:
 
@@ -28,8 +27,9 @@ class Dispatcher:
             match = pattern.match(path)
             if match:
                 return handler, match.groupdict()
-        raise RouteNotFound(f"No route matches {path}")
-    
+
+        return handlers.notfound, {}
+        # raise RouteNotFound(f"No route matches {path}")
 
 dispatcher = Dispatcher()
 

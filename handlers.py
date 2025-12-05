@@ -17,3 +17,9 @@ def contact(request , **kwargs):
     data = {'name':'dagim'}
     headers = {}
     return JsonResponse(headers = headers, status = status, data = data)
+
+def notfound(request , **kwargs):
+    status = 404
+    data = {'message':'no match found'}
+    headers = {}
+    return JsonResponse(headers = headers, status = status, data = data)
