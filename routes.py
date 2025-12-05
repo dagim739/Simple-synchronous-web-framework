@@ -6,4 +6,5 @@ url_patterns = [
 #   ('/route', handler)
     ('/home', handlers.home),
     ('/contact', handlers.contact),
+    ('/not-found', handlers.notfound)
 ]
